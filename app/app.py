@@ -1,12 +1,14 @@
 from flask import Flask, render_template, jsonify, request
 import sys
-sys.path.append('/Users/yongyong/Desktop/petstagram')
 import security
 from pymongo import MongoClient
 import boto3
 from botocore.exceptions import NoCredentialsError
 
+sys.path.append('/Users/yongyong/Desktop/petstagram')
+
 app = Flask(__name__)
+
 ACCESS_KEY = security.ACCESS_KEY
 SECRET_KEY = security.SECRET_KEY
 
