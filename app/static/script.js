@@ -104,5 +104,3 @@ $(".input_types").on("change keyup paste", function () {
 });
 
 //정렬조건
-
-array_type=$("#array").val();
