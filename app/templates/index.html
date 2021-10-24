@@ -15,207 +15,16 @@
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Favicon link -->
     <link rel="shortcut icon" href="../static/Images/favicon/favicon.ico">
-    <link rel="icon" href="../static/Images/favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
 
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
     <script>
-        $(document).ready(function () {
-            array_check();
-            $('#homebutton').get(0).click();
-            pet_list_cre();
-            best_pet();
-        });
-
-        
-        function array_check(){
-            arrayCheck=$("#array option:selected").attr('value')
-            console.log(arrayCheck)
-            $.ajax({
-                type:'POST',
-                url:'/api/arrayCheck',
-                data:{arrayCheck:arrayCheck},
-                success:function(response){
-                    pet_list_cre();
-                }
-            })
-        }
-
-        function pet_list_cre() {
-            $.ajax({
-                type: 'GET',
-                url: '/api/getPetList',
-                data: {},
-                success: function (response) {
-                    console.log('pet_list_cre() 함수실행')
-                    let pet_lists = response['pet_lists']
-                    let msg = response['result']
-                    
-                    console.log('pet_list_cre(data_send)_get :', msg, pet_lists)
-                    $('#pet_list').empty()
-                    for (let i = 0; i < pet_lists.length; i++) {
-                        temp_html = `<li>
-                    <div class="wrapper">
-                        <div class="card front-face">
-                            <img
-                                    src="${pet_lists[i]['img-url']}"
-                                    alt="Flip Card">
-                        </div>
-                        <div class="card back-face">
-                            <img
-                                    src="${pet_lists[i]['img-url']}"
-                                    alt="Flip Card">
-                            <div class="info">
-                                <div class="title">${pet_lists[i]['name']}</div>
-                                <p class="c_comment">${pet_lists[i]['note']}<br></p>
-                                <p class="thumbs" >${pet_lists[i]['heart']}</p>
-                            </div>
-                            <ul>
-                                <a class="fas fa-heart fa-2x" onclick="heartPet('${pet_lists[i]['name']}')"></a>
-                            </ul>
-                        </div>
-
-                </li>`
-                        // 마지막 리스트 작성하고나서 list 생성완료 콘솔로그 발생
-                        if (i === (pet_lists.length - 1)) {
-                            $('#pet_list').append(temp_html)
-                            console.log('list_생성완료', pet_lists.length, '개')
-                            break
-                        } else {
-                            console.log('list_생성중', i + 1, '개')
-                            $('#pet_list').append(temp_html)
-                        }
-                    }
-                    slid_count()
-                    console.log('pet_list_cre() 함수종료')
-                }
-            });
-        }
-
-        function best_pet() {
-            $.ajax({
-                type: 'GET',
-                url: '/api/bestpet',
-                data: {},
-                success: function (response) {
-                    console.log('bestpet 함수실행')
-                    let best_list = response['best']
-                    console.log('bestpet :', best_list)
-                    $('#name').text(`${best_list[0]['name']} 입니다.`)
-                    $('#home_title').append(`<li>
-                    <div class="wrapper" style="position: absolute; right: 10px; top:10px">
-                        <div class="card front-face">
-                            <img
-                                    src="${best_list[0]['img-url']}"
-                                    alt="Flip Card">
-                        </div>
-                        <div class="card back-face">
-                            <img
-                                    src="${best_list[0]['img-url']}"
-                                    alt="Flip Card">
-                            <div class="info">
-                                <div class="title">${best_list[0]['name']}</div>
-                                <p class="c_comment">${best_list[0]['note']}<br></p>
-                                <p class="thumbs" >${best_list[0]['heart']}</p>
-                            </div>
-                            <ul>
-                                <a class="fas fa-heart fa-2x" onclick="heartPet('${best_list[0]['name']}')"></a>
-                            </ul>
-                        </div>
-
-                </li>`)
-                }
-
-            });
-        }
-
-        function search(pet_type) {
-            $.ajax({
-                type: 'GET',
-                url: '/api/getPetList',
-                data: {},
-                success: function (response) {
-                    console.log('search() 함수실행')
-                    let j = 0
-                    let pet_lists = response['pet_lists']
-                    let msg = response['result']
-                    console.log('search_get :', msg, pet_lists)
-                    $('#pet_list').empty()
-
-                    for (let i = 0; i < pet_lists.length; i++) {
-                        if (pet_lists[i]['type'] === pet_type) {
-                            temp_html = `<li>
-                    <div class="wrapper">
-                        <div class="card front-face">
-                            <img
-                                    src="${pet_lists[i]['img-url']}"
-                                    alt="Flip Card">
-                        </div>
-                        <div class="card back-face">
-                            <img
-                                    src="${pet_lists[i]['img-url']}"
-                                    alt="Flip Card">
-                            <div class="info">
-                                <div class="title">${pet_lists[i]['name']}</div>
-                                <p class="c_comment">${pet_lists[i]['note']}<br></p>
-
-
-
-                                <!-- Like added -->
-                                <p class="thumbs" onclick="heartPet()">${pet_lists[i]['heart']}</p>
-
-
-
-                            </div>
-                            <ul>
-                                <a class="fas fa-heart fa-2x"></a>
-                            </ul>
-                        </div>
-
-                </li>`
-                            $('#pet_list').append(temp_html)
-                            j = j + 1
-                            console.log('serch 함수 실행중', j, ' 번째')
-                        } else {
-
-                        }
-                    }
-                    slid_count()
-
-                }
-            });
-        }
-
-        <!-- heartPet added -->
-        function heartPet(name) {
-            $.ajax({
-                type: 'POST',
-                url: '/api/heart',
-                data: {name_give: name},
-                success: function (response) {
-                    alert(response['msg']);
-                    window.location.reload()
-                }
-            });
-        }
-
+  
     </script>
-    <link rel="stylesheet" href="../../../Downloads/style.css">
+
 </head>
 <body>
 
@@ -245,7 +54,7 @@
 
 <!-- Home Section Start -->
 <section class="home" id="home">
-    <img src="../static/Images/background_02.png" style="position: absolute; bottom: 10px; width: 100%; height: 100%">
+    <!-- <img style="position: absolute; bottom: 10px; width: 100%; height: 100%; background-color: #F0F8FF;"> -->
     <div class="home-content">
 
         <div class="text" style="position: absolute; width: 90%;" id="home_title">

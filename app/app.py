@@ -30,6 +30,10 @@ def home():
 def login():
     return render_template('petadd.html')
 
+@app.route('/prac')
+def prac():
+    return render_template('prac.html')
+
 
 ## API 역할을 하는 부분
 @app.route('/api/getPetList', methods=['GET']) 
@@ -37,15 +41,10 @@ def getPetList():
     pet_lists= mongodb.getPetList(db)
     return jsonify({'result': 'success', 'pet_lists': pet_lists})
 
-@app.route('/api/cardadd', methods=['POST'])
-def card_add():
-    sample_receive = request.form['cards']
-    return jsonify({'msg': 'like 연결되었습니다!'})
-
 @app.route('/api/arrayCheck', methods=['POST'])
 def arrayCheck():
     mongodb.array = request.form['arrayCheck']
-    return jsonify({'msg': 'like 연결되었습니다!'})
+    return jsonify({'msg': 'arrayCheck 연결되었습니다!'})
 
 @app.route('/api/petadds', methods=['POST'])
 def petadd():

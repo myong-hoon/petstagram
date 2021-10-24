@@ -128,7 +128,7 @@ nav.sticky .menu-btn {
 /* home section styling */
 .home {
     height: 100vh;
-    width: 800px;
+    width: 100%;
 
     font-family: 'Ubuntu', sans-serif;
 }

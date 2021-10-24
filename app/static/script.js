@@ -1,7 +1,7 @@
 // Sticky Navigation Menu JS Code
 let nav = document.querySelector("nav");
 let scrollBtn = document.querySelector(".scroll-button a");
-console.log(scrollBtn);
+
 let val;
 window.onscroll = function () {
     if (document.documentElement.scrollTop > 20) {
@@ -66,19 +66,19 @@ function moveSlide(num) {
 nextBtn.addEventListener('click', function () {
     if (currentIdx < slideCount - 1 && currentIdx >= 0) {
         moveSlide(currentIdx + 1);
-        console.log(currentIdx);
+       
     } else {
         moveSlide(0);
-        console.log(currentIdx);
+      
     }
 });
 prevBtn.addEventListener('click', function () {
     if (currentIdx > 0) {
         moveSlide(currentIdx - 1);
-        console.log(currentIdx);
+      
     } else {
         moveSlide(0);
-        console.log(currentIdx);
+ 
     }
 });
 
@@ -95,12 +95,187 @@ function slid_count(){
 
 var oldVal = "";
 $(".input_types").on("change keyup paste", function () {
-    var currentVal = $(this).val();
-    if (currentVal == oldVal) {
+    var currentVal = $(this).val().replace('#','');
+    if(currentVal.indexOf('#')===-1){
+        if (currentVal == oldVal) {
+            pet_list_cre()
+        } else {
+            search(currentVal)
+            }
+    }
+    else{
+        alert('한개의 태그만 검색하세요')
+        $(".input_types").val('')
         pet_list_cre()
-    } else {
-        search(currentVal)
     }
 });
 
-//정렬조건
+$(document).ready(function () {
+    $('#homebutton').get(0).click();
+    array_check();
+    best_pet();
+});
+function array_check(){
+    arrayCheck=$("#array option:selected").attr('value')
+    $.ajax({
+        type:'POST',
+        url:'/api/arrayCheck',
+        data:{arrayCheck:arrayCheck},
+        success:function(response){
+            pet_list_cre();
+        }
+    })
+}
+function pet_list_cre() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/getPetList',
+        data: {},
+        success: function (response) {
+
+            let pet_lists = response['pet_lists']
+            let msg = response['result']
+            
+  
+            $('#pet_list').empty()
+            for (let i = 0; i < pet_lists.length; i++) {
+                temp_html = `<li>
+            <div class="wrapper">
+                <div class="card front-face">
+                    <img
+                            src="${pet_lists[i]['img-url']}"
+                            alt="Flip Card">
+                </div>
+                <div class="card back-face">
+                    <img
+                            src="${pet_lists[i]['img-url']}"
+                            alt="Flip Card">
+                    <div class="info">
+                        <div class="title">${pet_lists[i]['name']}</div>
+                        <p class="c_comment">${pet_lists[i]['note']}<br></p>
+                        <p class="thumbs" >${pet_lists[i]['heart']}</p>
+                    </div>
+                    <ul>
+                        <a class="fas fa-heart fa-2x" onclick="heartPet('${pet_lists[i]['name']}')"></a>
+                    </ul>
+                </div>
+
+        </li>`
+                // 마지막 리스트 작성하고나서 list 생성완료 콘솔로그 발생
+                if (i === (pet_lists.length - 1)) {
+                    $('#pet_list').append(temp_html)
+
+                    break
+                } else {
+
+                    $('#pet_list').append(temp_html)
+                }
+            }
+            slid_count()
+
+        }
+    });
+}
+
+function best_pet() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/bestpet',
+        data: {},
+        success: function (response) {
+
+            let best_list = response['best']
+
+            $('#name').text(`${best_list[0]['name']} 입니다.`)
+            $('#home_title').append(`<li>
+            <div class="wrapper" style="position: absolute; right: 10px; top:10px">
+                <div class="card front-face">
+                    <img
+                            src="${best_list[0]['img-url']}"
+                            alt="Flip Card">
+                </div>
+                <div class="card back-face">
+                    <img
+                            src="${best_list[0]['img-url']}"
+                            alt="Flip Card">
+                    <div class="info">
+                        <div class="title">${best_list[0]['name']}</div>
+                        <p class="c_comment">${best_list[0]['note']}<br></p>
+                        <p class="thumbs" >${best_list[0]['heart']}</p>
+                    </div>
+                    <ul>
+                        <a class="fas fa-heart fa-2x" onclick="heartPet('${best_list[0]['name']}')"></a>
+                    </ul>
+                </div>
+
+        </li>`)
+        }
+
+    });
+}
+
+function search(pet_type) {
+    $.ajax({
+        type: 'GET',
+        url: '/api/getPetList',
+        data: {},
+        success: function (response) {
+            let j = 0
+            let pet_lists = response['pet_lists']
+            let msg = response['result']
+            $('#pet_list').empty()
+            for (let i = 0; i < pet_lists.length; i++) {
+                for (let j = 0; j < pet_lists[i]['type'].replace('#','').split("#").length; j++){
+                    if (pet_type === pet_lists[i]['type'].replace('#','').split("#")[j]) {
+                    temp_html = `<li>
+            <div class="wrapper">
+                <div class="card front-face">
+                    <img
+                            src="${pet_lists[i]['img-url']}"
+                            alt="Flip Card">
+                </div>
+                <div class="card back-face">
+                    <img
+                            src="${pet_lists[i]['img-url']}"
+                            alt="Flip Card">
+                    <div class="info">
+                        <div class="title">${pet_lists[i]['name']}</div>
+                        <p class="c_comment">${pet_lists[i]['note']}<br></p>
+
+
+
+                        <!-- Like added -->
+                        <p class="thumbs" onclick="heartPet()">${pet_lists[i]['heart']}</p>
+
+
+
+                    </div>
+                    <ul>
+                        <a class="fas fa-heart fa-2x"></a>
+                    </ul>
+                </div>
+
+        </li>`
+                    $('#pet_list').append(temp_html)
+                } else {
+
+                }
+            }
+            }
+            slid_count()
+
+        }
+    });
+}
+
+function heartPet(name) {
+    $.ajax({
+        type: 'POST',
+        url: '/api/heart',
+        data: {name_give: name},
+        success: function (response) {
+            alert(response['msg']);
+            window.location.reload()
+        }
+    });
+}

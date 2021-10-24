@@ -1,0 +1,31 @@
+<html>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            
+
+        });
+        let liist = '#가#나#다#라#마#바#사'
+
+
+
+        function search(data) {
+            for (let i = 0; i < liist.replace('#','').split("#").length; i++){
+                
+                if (data === liist.replace('#','').split("#")[i]){
+                    console.log('ok')
+                }
+
+
+            }
+            
+        }
+    </script>
+
+    <body>
+        <input class="input_types" placeholder="태그를 입력하세요 ex) 강아지 or 고양이">
+        <script src="../static/prac.js"></script>
+    </body>
+</html>
