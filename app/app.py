@@ -3,6 +3,9 @@ import time
 import sys
 sys.path.append('/Users/yongyong/Desktop/petstagram')
 sys.path.append('/Users/yongyong/Desktop/petstagram/app/moudle')
+sys.path.append('/home/ubuntu/petstagram/')
+sys.path.append('/home/ubuntu/petstagram/app/moudle')
+
 import security,s3ImgUpload,mongodb
 from pymongo import MongoClient
 
