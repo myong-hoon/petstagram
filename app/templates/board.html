@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/board.css">
+    </head>
+
+    <style>
+        .boardBox {
+            width: 100%;
+            height: 100%;
+            min-width: 200px;
+            min-height: 300px;
+            max-width: 400px;
+            max-height: 600px;
+            background-color: #eeececa4;
+            border: 1px solid rgba(146, 146, 146, 0.288);
+            position: relative;
+            margin: auto;
+        }
+
+        .boardBox .boardNavBox {
+            width: 100%;
+            height: 40px;
+            background-color: black;
+            position: relative;
+
+        }
+
+        .boardBox .boardNavBox .topImgBox {
+            width: 20px;
+            height: 20px;
+            border-radius: 70%;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            transform: translate(0%,50%);
+            background-color: #999999;
+
+        }
+
+        .boardBox .boardNavBox .topImgBox .topImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .boardBox .boardNavBox .topImgNameBox {
+            position: absolute;
+            left: 40px;
+            transform: translate(0%,50%);
+            color: white;
+        }
+
+        .boardBox .boardNavBox .topRightBtn {
+            position: absolute;
+            right: 10px;
+            transform: translate(0%,50%);
+            background-color: transparent !important;
+            border-color: transparent;
+            color: #FFFFFF;
+
+        }
+
+        .boardBox .boardImgBox {
+            margin-top: 10px;
+            width: 100%;
+            position: relative;
+            text-align: center;
+
+        }
+        .boardBox .boardImgBox .mainImg {
+
+            width: 95%;
+            border-radius: 5%;
+            display: inline-block;
+
+        }
+
+        .boardBox .tagBox{
+            width: 95%;
+            display: inline-block;
+            
+        }
+    </style>
+    <body>
+
+        <div class="boardBox">
+            <div class="boardNavBox">
+                <div class="topImgBox">
+                    <img src="http://www.w3bai.com/w3css/img_avatar3.png" alt="" class="topImg">
+                </div>
+                <div class="topImgNameBox">
+                    <label for="">rerer</label>
+                </div>
+
+                <button class="topRightBtn" onclick="alert('dd')">
+                    ></button>
+
+            </div>
+
+            <div class="boardImgBox">
+                <img
+                    class="mainImg"
+                    src="https://img.huffingtonpost.com/asset/5ec601832500000f1eeb1d4f.jpeg?cache=WuaLzjSHpx&ops=1778_1000"
+                    alt="">
+
+                    <div class="tagBox">
+                        <div style="text-align: left;">
+                        <label for="">#강아지스타그램 #내이빨이뿌지?</label>
+                        </div>
+                    </div>
+            </div>
+
+            
+        </div>
+    </body>
+</html>
