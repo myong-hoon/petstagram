@@ -1,7 +1,21 @@
 <html>
     <head>
         <link rel="stylesheet" href="../static/board.css">
-    </head>
+        <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <!-- 합쳐지고 최소화된 최신 CSS -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+        <!-- 부가적인 테마 -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+        <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+            
 
     <style>
         .boardBox {
@@ -20,8 +34,8 @@
         .boardBox .boardNavBox {
             width: 100%;
             height: 40px;
-            background-color: black;
             position: relative;
+            border-bottom: 1px solid #83838381;
 
         }
 
@@ -46,17 +60,28 @@
         .boardBox .boardNavBox .topImgNameBox {
             position: absolute;
             left: 40px;
-            transform: translate(0%,50%);
-            color: white;
+            transform: translate(0%,40%);
+
         }
 
-        .boardBox .boardNavBox .topRightBtn {
+        .boardBox .boardNavBox .topRightHeartBar {
+            position: absolute;
+            right: 30px;
+            transform: translate(0%,130%);
+            background-color: transparent !important;
+            border-color: transparent;
+            color: #000000;
+
+        }
+
+        .boardBox .boardNavBox .topRightHeart {
             position: absolute;
             right: 10px;
             transform: translate(0%,50%);
             background-color: transparent !important;
             border-color: transparent;
-            color: #FFFFFF;
+            color: #000000;
+            font-size:large;
 
         }
 
@@ -75,26 +100,76 @@
 
         }
 
-        .boardBox .tagBox{
+        .boardBox .heartBox {
+            width: 95%;
+            height: 40px;
+            display: inline-block;
+        }
+
+        .boardBox .tagBox {
+            margin-top: 10px;
+            margin-bottom: 10px;
             width: 95%;
             display: inline-block;
+
+        }
+
+    </style>
+    <script>
+        let img='http://www.w3bai.com/w3css/img_avatar3.png'
+
+        function imgAdd(){
+            $("#topImgBox").append(`<img src="${img}" alt="" class="topImg">`)
             
         }
-    </style>
+
+        let userId='hyhoon'
+
+        function idAdd(){
+            $("#topImgNameBox").append(`<label for="">${userId}</label>`)
+            
+        }
+
+
+
+        let tag=["강아지스타그램","내이빨이쁘지?","가나다라마바사","아자차타차파하","기니디리미비시","우하하하하하하하하하ㅏ"]
+
+        function tagAdd(){
+            for(let i=0; i<tag.length;i++){
+                a=`<label> #${tag[i]}</label>`
+                $("#tagBox").append(a).append(" ")
+            }
+        }
+
+
+        let accumulateHeart="12K"
+        let monthlyHeart="120"
+        let weekiyHeart="33"
+
+        function HeartBarAdd(){
+            $("#heartBar").append(`<span class="label label-danger" id="HeartBar">Heart : 누적 ${accumulateHeart} 월간 ${monthlyHeart} 주간 ${weekiyHeart}  </span>`)
+            
+        }
+    </script>
     <body>
 
         <div class="boardBox">
             <div class="boardNavBox">
-                <div class="topImgBox">
-                    <img src="http://www.w3bai.com/w3css/img_avatar3.png" alt="" class="topImg">
+                <div class="topImgBox" id="topImgBox">
+                    
                 </div>
-                <div class="topImgNameBox">
-                    <label for="">rerer</label>
+                <div class="topImgNameBox" id="topImgNameBox">
+                    
+                </div>
+                <div class="topRightHeartBar" id=heartBar>
+    
+                    
                 </div>
 
-                <button class="topRightBtn" onclick="alert('dd')">
-                    ></button>
-
+                <div class="topRightHeart" id=heart>
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                </div>
+                
             </div>
 
             <div class="boardImgBox">
@@ -103,14 +178,19 @@
                     src="https://img.huffingtonpost.com/asset/5ec601832500000f1eeb1d4f.jpeg?cache=WuaLzjSHpx&ops=1778_1000"
                     alt="">
 
-                    <div class="tagBox">
-                        <div style="text-align: left;">
-                        <label for="">#강아지스타그램 #내이빨이뿌지?</label>
-                        </div>
-                    </div>
+                <!-- <div class="heartBox">
+
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span> Star
+
+                </div> -->
+                    
+                <div class="tagBox" id="tagBox">
+
+                    
+
+                </div>
             </div>
 
-            
         </div>
     </body>
 </html>
