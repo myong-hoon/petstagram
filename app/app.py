@@ -89,6 +89,38 @@ def bsetpet():
     best = sorted(pet_lists, key=(lambda x: x['heart']), reverse=True)
     return jsonify({'best': best})
 
+@app.route('/api/prac', methods=['GET'])  # pet list를 db에서 가져와서 index.html로 보내줌
+def prac2():
+
+    tag = ['#강아지','#강아지스타그램']
+    forumLists = [
+        {
+            'type': 'new', 
+            'del': False, 
+            'img': 'http://www.w3bai.com/w3css/img_avatar3.png', 
+            'id': 'hyhoon', 
+            'note': '와 이쁘네요!!', 
+        },
+        {
+            'type': 're', 
+            'del': False,
+            'img': 'http://www.w3bai.com/w3css/img_avatar3.png', 
+            'id': 'hoon', 
+            'note': '감솸돠', 
+        },
+            ]
+    return jsonify(
+        {'img': 'http://www.w3bai.com/w3css/img_avatar3.png',
+    'userId':'hyhoon',
+    'accumulateHeart': 1,
+    'monthlyHeart':2,
+    'weekiyHeart':3,
+    'tag': tag,
+    'forumLists' : forumLists,
+    'heartCheck': False,
+    })
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

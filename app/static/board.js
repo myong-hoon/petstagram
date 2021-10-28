@@ -1,4 +1,3 @@
-let heartClick = false
 
 
 function forum(forumLists) {
@@ -58,47 +57,22 @@ function HeartBarAdd(accumulateHeart,monthlyHeart,weekiyHeart) {
 
 }
 
-function goo(){ 
+function goo(img,userId,accumulateHeart,monthlyHeart,weekiyHeart,tag,forumLists,heartCheck){ 
 
-    $("#gogo").append(board_form)
-    imgAdd(img)
-    idAdd(userId)
-    HeartBarAdd(accumulateHeart,monthlyHeart,weekiyHeart)
-    
-    tagAdd(tag)
-    forum(forumLists)
-
-
-
-}
-
-let img = ""
-let userId='ddd'
-
-let forumLists=[{'type':'new',
-'del':false,
-'img':'11',
-'id':'hthoon',
-'note':'HI'}]
-let tag=['#강아지스타그램']
-
-let accumulateHeart =1
-let monthlyHeart =1
-let weekiyHeart = 1
-
-let board_form =`
+    let heart_status = heartCheck
+    let board_form =`
 <script>
+
+if(${heart_status}==true){
+    heart.style.color='red'
+}
+else{
+    heart.style.color='black'
+}
 
 function heartOnClick(){
 
-    if(heartClick == true){
-        heart.style.color = "red"
-        heartClick = false
-    }
-    else if(heartClick == false){
-        heart.style.color = "black"
-        heartClick = true
-    }
+    alert('ss')
 
 }
 </script>
@@ -127,6 +101,54 @@ function heartOnClick(){
 <div style="padding: 10px 10px 10px 10px; border:1px solid #999999; border-radius: px;">
 <input type="text" style="border-radius: 10%;">
 </div>
+</div>
+`
+    $("#gogo").append(board_form)
+    imgAdd(img)
+    idAdd(userId)
+    HeartBarAdd(accumulateHeart,monthlyHeart,weekiyHeart)
+    tagAdd(tag)
+    forum(forumLists)
 
-</div>`
 
+
+
+}
+
+// let img = ""
+// let userId='ddd'
+
+// let forumLists=[{'type':'new',
+// 'del':false,
+// 'img':'11',
+// 'id':'hthoon',
+// 'note':'HI'}]
+// let tag=['#강아지스타그램']
+
+// let accumulateHeart =1
+// let monthlyHeart =1
+// let weekiyHeart = 1
+
+
+
+function go() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/prac',
+        data: {},
+        success: function (response) {
+
+            let img = response['img']
+            let userId = response['userId']
+            let accumulateHeart = response['accumulateHeart']
+            let monthlyHeart = response['monthlyHeart']
+            let weekiyHeart = response['weekiyHeart']
+            let tag = response['tag']
+            let forumLists = response['forumLists']
+            let heartCheck = response['heartCheck']
+            
+            goo(img,userId,accumulateHeart,monthlyHeart,weekiyHeart,tag,forumLists,heartCheck)
+
+        }
+    });
+}
