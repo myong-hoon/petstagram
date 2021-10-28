@@ -1,31 +1,88 @@
-<html>
-    <link rel="stylesheet" href="../static/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            PETSTAGRAM
+        </title>
+        <!-- Favicon link -->
+        <link rel="shortcut icon" href="../static/Images/favicon/favicon.ico">
+        <!-- style.css -->
+        <link rel="stylesheet" href="../static/board.css">
+        <link rel="stylesheet" href="../static/style.css">
+        <script src="../static/board.js"></script>
+        <!-- jquery -->
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-        $(document).ready(function () {
-            
+        <!-- 부가적인 테마 -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-        });
-        let liist = '#가#나#다#라#마#바#사'
-
-
-
-        function search(data) {
-            for (let i = 0; i < liist.replace('#','').split("#").length; i++){
-                
-                if (data === liist.replace('#','').split("#")[i]){
-                    console.log('ok')
-                }
-
-
-            }
-            
-        }
-    </script>
-
+        <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    </head>
     <body>
-        <input class="input_types" placeholder="태그를 입력하세요 ex) 강아지 or 고양이">
-        <script src="../static/prac.js"></script>
+
+        <!-- Move to up button -->
+        <div class="scroll-button">
+            <a href="#home">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
+        <!-- navgaition menu -->
+        <nav>
+            <div class="navbar">
+                <div class="logo">
+                    <a href="#">Petstagram</a>
+                </div>
+                <ul class="menu">
+                    <li>
+                        <a href="#home" id="homebutton">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about">Photo</a>
+                    </li>
+                    <li>
+                        <a href="#skills">Video</a>
+                    </li>
+                    <li>
+                        <a href="#services">Quiz</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+                    <div class="cancel-btn">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </ul>
+            </div>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+
+        <!-- About Section Start -->
+        <!-- Home Section Start -->
+<section class="home" id="home" style="background-color: #F0F8FF">
+    </section>
+
+        <div style="height: 100px; margin-top: 20px;" id="gogo">
+
+        </div>
+        <!-- Footer Section Start -->
+        <footer>
+            <div class="text">
+                <span>Created By
+                    <a href="#">Group5 members</a>
+                    | CC by CodingLab</span>
+            </div>
+        </footer>
+
     </body>
 </html>

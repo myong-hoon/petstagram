@@ -1,7 +1,10 @@
-<html>
+<!-- <html>
     <head>
         <link rel="stylesheet" href="../static/board.css">
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="../static/board.js"></script> -->
+
+        <!-- jquery -->
+        <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 
         <!-- 합쳐지고 최소화된 최신 CSS -->
         <link
@@ -14,268 +17,19 @@
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
         <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-        <script
+        <!-- <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
         <style>
 
-            .boardBox {
-                width: 100%;
-                min-width: 200px;
-                min-height: 300px;
-                max-width: 400px;
-                background-color: #eeececa4;
-                border: 1px solid rgba(146, 146, 146, 0.288);
-                position: relative;
-                margin: auto;
-            }
-
-            .boardBox .boardNavBox {
-                width: 100%;
-                height: 40px;
-                position: relative;
-                border-bottom: 1px solid #83838381;
-
-            }
-
-            .boardBox .boardNavBox .topImgBox {
-                width: 20px;
-                height: 20px;
-                border-radius: 70%;
-                overflow: hidden;
-                position: absolute;
-                left: 10px;
-                transform: translate(0%,50%);
-                background-color: #999999;
-
-            }
-
-            .boardBox .boardNavBox .topImgBox .topImg {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .boardBox .boardNavBox .topImgNameBox {
-                position: absolute;
-                left: 40px;
-                transform: translate(0%,40%);
-
-            }
-
-            .boardBox .boardNavBox .topRightHeartBar {
-                position: absolute;
-                right: 30px;
-                transform: translate(0%,130%);
-                background-color: transparent !important;
-                border-color: transparent;
-                color: #000000;
-
-            }
-
-            .boardBox .boardNavBox .topRightHeart {
-                position: absolute;
-                right: 10px;
-                transform: translate(0%,50%);
-                background-color: transparent !important;
-                border-color: transparent;
-                color: #000000;
-                font-size: large;
-
-            }
-
-            .boardBox .boardImgBox {
-                margin-top: 10px;
-                width: 100%;
-                position: relative;
-                text-align: center;
-
-            }
-            .boardBox .boardImgBox .mainImg {
-
-                width: 95%;
-                border-radius: 5%;
-                display: inline-block;
-
-            }
-
-            .boardBox .heartBox {
-                width: 95%;
-                height: 40px;
-                display: inline-block;
-            }
-
-            .boardBox .tagBox {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                width: 95%;
-                display: inline-block;
-
-            }
-
-            .forumImg {
-                width: 5%;
-                border-radius: 90%;
-                display: inline-block;
-            }
+            
         </style>
         <script>
 
-            function go() {
-
-                // img / id / heartbar(누적,월간,주간) / heart 누름여부 / tag /
-                imgAdd()
-                idAdd()
-                HeartBarAdd()
-                heartAdd()
-                tagAdd()
-                forum(forumLists)
-                //게시판(img / id / note / type(new | re) / del (true | false) )
-
-            }
-
-            let forumLists = [
-                {
-                    'type': 'new', // new or re
-                    'del': false, // false or ture
-                    'img': 'http://www.w3bai.com/w3css/img_avatar3.png', // login admin img
-                    'id': 'hyhoon', //login admin id
-                    'note': '와 이쁘네요!!', //login admin id
-                },
-                {
-                    'type': 're', // new or re
-                    'del': false, // false or ture
-                    'img': 'http://www.w3bai.com/w3css/img_avatar3.png', // login admin img
-                    'id': 'hoon', //login admin id
-                    'note': '감솸돠', //login admin id
-                }
-            ]
-
-            function forum(forumLists) {
-                temp_doc = ''
-                for (let i = 0; i < forumLists.length; i++) {
-                    console.log(
-                        forumLists[i]['type'],
-                        forumLists[i]['del'],
-                        forumLists[i]['img'],
-                        forumLists[i]['id'],
-                        forumLists[i]['note']
-                    )
-                    if (forumLists[i]['type'] != 'new') {
-                        temp_doc = "ㄴ"
-                    }
-                    if (forumLists[i]['del'] == 'true') {
-                        temp_doc += "삭제된 내용입니다."
-
-                    } else {
-                        temp_doc += `<img
-                        class="forumImg"
-                        src="${forumLists[i]['img']} "
-                        alt=""> ${forumLists[i]['id']} / ${forumLists[i]['note']}`
-                    }
-                    $("#formmm").append(temp_doc)
-                    $("#formmm").append('<br>')
-                }
-
-            }
-
-            let img = 'http://www.w3bai.com/w3css/img_avatar3.png'
-
-            function imgAdd() {
-                $("#topImgBox").append(`<img src="${img}" alt="" class="topImg">`)
-
-            }
-
-            let userId = 'hyhoon'
-
-            function idAdd() {
-                $("#topImgNameBox").append(`<label for="">${userId}</label>`)
-
-            }
-
-            let tag = [
-                "강아지스타그램",
-                "내이빨이쁘지?",
-                "가나다라마바사",
-                "아자차타차파하",
-                "기니디리미비시",
-                "우하하하하하하하하하ㅏ"
-            ]
-
-            function tagAdd() {
-                for (let i = 0; i < tag.length; i++) {
-                    a = `<label> #${tag[i]}</label>`
-                    $("#tagBox")
-                        .append(a)
-                        .append(" ")
-                }
-            }
-
-            let accumulateHeart = "12K"
-            let monthlyHeart = "120"
-            let weekiyHeart = "33"
-
-            function HeartBarAdd() {
-                $("#heartBar").append(
-                    `<span class="label label-danger" id="HeartBar">Heart : 누적 ${accumulateHeart} 월간 ${monthlyHeart} 주간 ${weekiyHeart}  </span>`
-                )
-
-            }
-
-            let heartClick = false
-
-            function heartOnClick() {
-
-                if (heartClick == false) {
-                    heart.style.color = "red"
-                    heartClick = true
-                    console.log("a")
-                } else {
-                    heart.style.color = "black"
-                    heartClick = false
-                    console.log("a")
-                }
-
-            }
-
-            function heartAdd() {
-                if (heartClick == true) {
-                    $("#topRightHeart").append(
-                        `<span class="glyphicon glyphicon-heart" aria-hidden="true" onclick="heartOnClick()" id="heart"></span>`
-                    )
-                } else {
-                    $("#topRightHeart").append(
-                        `<span class="glyphicon glyphicon-heart" aria-hidden="true" onclick="heartOnClick()" id="heart"></span>`
-                    )
-                }
-            }
+            
         </script>
-        <body>
+        <body> -->
 
-            <div class="boardBox">
-                <div class="boardNavBox">
-                    <div class="topImgBox" id="topImgBox"></div>
-                    <div class="topImgNameBox" id="topImgNameBox"></div>
-                    <div class="topRightHeartBar" id="heartBar"></div>
-
-                    <div class="topRightHeart" id="topRightHeart"></div>
-
-                </div>
-
-                <div class="boardImgBox">
-                    <img
-                        class="mainImg"
-                        src="https://img.huffingtonpost.com/asset/5ec601832500000f1eeb1d4f.jpeg?cache=WuaLzjSHpx&ops=1778_1000"
-                        alt="">
-
-                    <!-- <div class="heartBox"> <span class="glyphicon glyphicon-heart"
-                    aria-hidden="true" style="color: red;"></span> Star </div> -->
-
-                    <div class="tagBox" id="tagBox"></div>
-                </div>
-
-                <div id='formmm' style="padding: 10px 10px 10px 10px; border:1px solid #999999; border-radius: 3px;"></div>
-
-            </div>
-        </body>
-    </html>
+            
+        <!-- </body>
+    </html> -->
