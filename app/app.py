@@ -92,7 +92,7 @@ def bsetpet():
 @app.route('/api/prac', methods=['GET'])  # pet list를 db에서 가져와서 index.html로 보내줌
 def prac2():
 
-    tag = ['#강아지','#강아지스타그램']
+    tag = ['강아지','강아지스타그램']
     forumLists = [
         {
             'type': 'new', 
